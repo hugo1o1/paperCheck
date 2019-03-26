@@ -1,0 +1,116 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<title>文件上传</title>  
+<meta charset="utf-8"/>   
+<link rel="stylesheet" href="/public/css/bootstrap.min.css">  
+<script src="/public/js/jquery.min.js"></script>  
+<script src="/public/js/bootstrap.min.js"></script>
+<style>
+    /* layout.css Style */
+        .upload-drop-zone {
+          height: 200px;
+          border-width: 2px;
+          margin-bottom: 20px;
+        }
+ 
+        /* skin.css Style*/
+        .upload-drop-zone {
+          color: #ccc;
+          border-style: dashed;
+          border-color: #ccc;
+          line-height: 200px;
+          text-align: center;
+        }
+        .upload-drop-zone.drop {
+          color: #222;
+          border-color: #222;
+        }
+</style>
+</head>
+<body>
+<div class="container-fluid">
+       <div class="panel panel-primary">  
+       <nav class="navbar navbar-inverse" role="navigation">
+	<div class="container-fluid">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#">上传文件</a>
+	</div>
+	<div>
+		<ul class="nav navbar-nav">
+			
+		
+		</ul>
+	</div>
+	</div>
+</nav>
+
+        <div class="panel-body">
+ 
+          <!-- Standar Form -->
+          <h4>选择文件</h4>
+          <form action="fileupload" method="post" enctype="multipart/form-data" id="js-upload-form">
+            <div class="form-inline">
+              <div class="form-group">
+                <input type="file" name="file" id="js-upload-files" multiple>
+              </div>
+              <button type="submit" class="btn btn-success fileinput-button" id="js-upload-submit">上传</button>
+            </div>
+          </form>
+ 
+          <!-- Drop Zone -->
+          <h4>或者将文件拖拽到这里</h4>
+          <div class="upload-drop-zone" id="drop-zone">
+            文件显示
+        
+ 
+          <!-- Upload Finished -->
+          <div class="js-upload-finished">
+          
+            
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+    <script>
+            function($) {
+            'use strict';
+ 
+            // UPLOAD CLASS DEFINITION
+            // ======================
+ 
+            var dropZone = document.getElementById('drop-zone');
+            var uploadForm = document.getElementById('js-upload-form');
+ 
+            var startUpload = function(files) {
+                console.log(files)
+            }
+ 
+            uploadForm.addEventListener('submit', function(e) {
+                var uploadFiles = document.getElementById('js-upload-files').files;
+                e.preventDefault()
+ 
+                startUpload(uploadFiles)
+            })
+ 
+            dropZone.ondrop = function(e) {
+                e.preventDefault();
+                this.className = 'upload-drop-zone';
+ 
+                startUpload(e.dataTransfer.files)
+            }
+ 
+            dropZone.ondragover = function() {
+                this.className = 'upload-drop-zone drop';
+                return false;
+            }
+ 
+            dropZone.ondragleave = function() {
+                this.className = 'upload-drop-zone';
+                return false;
+            }
+ 
+        }(jQuery);
+    </script>
+</body>
+</html>

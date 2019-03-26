@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="/public/css/bootstrap.min.css"> 
+   <script src="/public/js/jquery.min.js"></script>
+   <script src="/public/js/template-web.js"></script>
+   <script>
+  
+   function logout(){
+       window.location.href= "/";
+   }
+
+   
+   
+   </script> 
+    <title>paperprint</title>
+</head>
+<body>
+   <div class="container-fluid">
+	<div class="row clearfix">
+		<div class="col-md-14 column">
+        <!-- 上方导航栏 -->
+			<nav class="navbar navbar-inverse" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">paperManager</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+					</ul>
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" />
+						</div> <button type="submit" class="btn btn-default">search</button>
+					</form>
+                   
+					<ul class="nav navbar-nav navbar-right">
+                    
+						 <li>
+							 <a href="#" onclick="logout()">注销</a>
+						</li>
+						
+					</ul>
+				</div>
+				
+			</nav>
+            
+            <!-- 文件展示 -->
+            <table class="table">
+                 <caption>试卷管理</caption>
+               
+                 <thead>
+                            <tr>
+                                <th>试卷名称</th>
+                                <th>试卷状态</th>
+                                 <th>份数</th>
+                            </tr>
+                </thead>
+                <tbody>
+                       {{each comments}} 
+                       <tr>
+                            <td>{{$value.papername}}</td>
+                            <td>{{$value.paperstate}}</td>
+                            <td>{{$value.num}}</td>
+                        </tr>
+                        {{/each }}
+                </tbody>
+        </table>
+            <!-- 底部分页栏 -->
+            <div>
+                
+                <div>
+                     <ul class="pagination" style="float:left">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                       
+                        <!-- <button class= "btn btn-info"style="float:right" onclick="button_click()">添加</button> -->
+                        <form action="uploadfile" id="form" method="post" enctype="multipart/form-data" style=" padding-left:500px">
+                         <!-- <input id="lefile" type="file" style="display:none"> -->
+                         <!-- <div class="input-append"> -->
+                                <!-- <input id="photoCover" class="input-large" type="text" style="height:30px;" > -->
+                                <!-- <a class="btn" onclick="$('input[id=lefile]').click();">浏览</a> -->
+                                <input type="submit" class="btn btn-success fileinput-button" value = "上传试卷">
+                            <!-- </div> -->
+                        </form>
+                      
+ 
+
+                    </ul>
+                 
+                </div>
+                
+		    </div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+$('input[id=lefile]').change(function() {
+$('#photoCover').val($(this).val());
+
+});
+</script>
+
+
+</html>
+
